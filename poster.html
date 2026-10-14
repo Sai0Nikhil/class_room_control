@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>STM32F446RE Project Report Structure - Smart Classroom Controller</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif; }
+  body { background-color: #f0f3f8; padding: 20px; color: #222; }
+  
+  .poster-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    background: #ffffff;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  /* Header Banner */
+  .header-banner {
+    background: #0d2346;
+    color: #ffffff;
+    padding: 18px 24px;
+    text-align: center;
+    border-bottom: 4px solid #ffcc00;
+  }
+  .header-banner h1 {
+    font-size: 26px;
+    letter-spacing: 0.5px;
+  }
+  .header-banner h1 span.highlight {
+    color: #ffcc00;
+  }
+  .header-banner p {
+    font-size: 13px;
+    color: #c8d7eb;
+    margin-top: 4px;
+  }
+
+  /* Poster Grid */
+  .poster-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 12px;
+    padding: 16px;
+    background: #f7f9fc;
+  }
+
+  .card {
+    background: #ffffff;
+    border: 1.5px solid #d9e2ec;
+    border-radius: 8px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.04);
+  }
+
+  .card-header {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 8px;
+    padding-bottom: 6px;
+    border-bottom: 1.5px solid #edf2f7;
+  }
+
+  .badge {
+    width: 26px;
+    height: 26px;
+    border-radius: 50%;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: bold;
+    flex-shrink: 0;
+  }
+
+  .card-title {
+    font-size: 14px;
+    font-weight: 700;
+    color: #102a43;
+  }
+
+  .card-content {
+    font-size: 11.5px;
+    line-height: 1.45;
+    color: #334e68;
+    flex-grow: 1;
+  }
+
+  .card-content ul {
+    margin-left: 14px;
+    margin-top: 4px;
+  }
+  .card-content li {
+    margin-bottom: 4px;
+  }
+
+  .highlight-label {
+    font-weight: 600;
+    color: #0b3954;
+  }
+
+  /* Specific Column Spanning */
+  .col-2 { grid-column: span 2; }
+  .col-3 { grid-column: span 3; }
+  .col-4 { grid-column: span 4; }
+  .col-5 { grid-column: span 5; }
+  .col-6 { grid-column: span 6; }
+  .col-7 { grid-column: span 7; }
+  .col-8 { grid-column: span 8; }
+  .col-12 { grid-column: span 12; }
+
+  /* Colors */
+  .bg-red { background: #e53e3e; }
+  .bg-blue { background: #2b6cb0; }
+  .bg-green { background: #2f855a; }
+  .bg-orange { background: #dd6b20; }
+  .bg-purple { background: #805ad5; }
+  .bg-teal { background: #319795; }
+  .bg-pink { background: #d53f8c; }
+
+  .diagram-box {
+    background: #edf2f7;
+    border: 1px dashed #cbd5e0;
+    border-radius: 6px;
+    padding: 8px;
+    margin-top: 6px;
+    font-family: monospace;
+    font-size: 10px;
+    text-align: center;
+    color: #243b53;
+  }
+
+  .test-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 10.5px;
+    margin-top: 4px;
+  }
+  .test-table th, .test-table td {
+    border: 1px solid #cbd5e0;
+    padding: 4px 6px;
+    text-align: left;
+  }
+  .test-table th {
+    background: #2b6cb0;
+    color: #fff;
+  }
+  .test-table tr:nth-child(even) {
+    background: #f7fafc;
+  }
+  .status-pass {
+    color: #22543d;
+    font-weight: bold;
+    background: #c6f6d5;
+    padding: 1px 4px;
+    border-radius: 3px;
+  }
+
+  .footer-banner {
+    background: #0d2346;
+    color: #c8d7eb;
+    text-align: center;
+    padding: 10px;
+    font-size: 12px;
+    font-weight: 600;
+  }
+
+  @media (max-width: 1024px) {
+    .poster-grid { grid-template-columns: repeat(6, 1fr); }
+    .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8 { grid-column: span 6; }
+  }
+</style>
+</head>
+<body>
+
+<div class="poster-container">
+  <!-- Header Banner -->
+  <div class="header-banner">
+    <h1><span class="highlight">STM32F446RE</span> SMART CLASSROOM & REFLECTION-FREE PRESENTATION CONTROLLER</h1>
+    <p>Department of Computer Science and Engineering • K L Deemed to be University, Vijayawada • Academic Year: 2025 – 2026</p>
+  </div>
+
+  <!-- 14-Section Grid -->
+  <div class="poster-grid">
+
+    <!-- 1. Title Page -->
+    <div class="card col-3">
+      <div class="card-header">
+        <div class="badge bg-red">1</div>
+        <div class="card-title">Title Page</div>
+      </div>
+      <div class="card-content">
+        <p><span class="highlight-label">Project Title:</span> Smart Classroom & Reflection-Free Presentation Controller using STM32F446RE</p>
+        <p style="margin-top:6px;"><span class="highlight-label">Submitted by:</span><br>Student Name (Roll No.) | Section</p>
+        <p style="margin-top:6px;"><span class="highlight-label">Under the Guidance of:</span><br>Assistant Professor<br>Dept. of Computer Science & Engineering<br>K L Deemed to be University, Vijayawada</p>
+      </div>
+    </div>
+
+    <!-- 2. Abstract -->
+    <div class="card col-3">
+      <div class="card-header">
+        <div class="badge bg-blue">2</div>
+        <div class="card-title">Abstract</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>Overview:</strong> Integrated embedded automation framework engineered for educational institutions.</li>
+          <li><strong>Problem:</strong> Severe screen glare, note-taking blackout dilemma, and empty classroom energy waste.</li>
+          <li><strong>Methodology:</strong> Dual-zone dimming (0% Front, 20% Back), motorized blind servo with warning chime, and PIR 30s Eco-Sleep.</li>
+          <li><strong>Outcome:</strong> 48.6% power savings and 100% specular glare eradication.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 3. Introduction -->
+    <div class="card col-3">
+      <div class="card-header">
+        <div class="badge bg-green">3</div>
+        <div class="card-title">Introduction</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>Background:</strong> Modern classrooms rely on high-lumen digital projectors and smart displays.</li>
+          <li><strong>Problem:</strong> Sunlight glare degrades projection; turning all lights off prevents note-taking.</li>
+          <li><strong>Motivation:</strong> Optimize visual ergonomics, student attention, and campus energy conservation.</li>
+          <li><strong>Scope:</strong> Universities, conference centers, and auditoriums.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 4. System Requirements -->
+    <div class="card col-3">
+      <div class="card-header">
+        <div class="badge bg-orange">4</div>
+        <div class="card-title">System Requirements</div>
+      </div>
+      <div class="card-content">
+        <p class="highlight-label">Hardware Stack:</p>
+        <ul>
+          <li>STM32 Nucleo-F446RE (ARM Cortex-M4)</li>
+          <li>Sensors: LDR (Light), LM35 (Temp), PIR (Motion)</li>
+          <li>Actuators: Relays (Lights/Fan), SG90 Servo, Buzzer</li>
+          <li>Display/Comm: 16x2 I2C LCD, USART2 (115200)</li>
+        </ul>
+        <p class="highlight-label" style="margin-top:6px;">Software Stack:</p>
+        <ul>
+          <li>STM32CubeIDE v1.14+ / STM32CubeMX / HAL / PuTTY</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 5. System Architecture -->
+    <div class="card col-6">
+      <div class="card-header">
+        <div class="badge bg-purple">5</div>
+        <div class="card-title">System Architecture</div>
+      </div>
+      <div class="card-content">
+        <div class="diagram-box">
+          [ INPUT SENSORS ]<br>
+          PA0: LDR (Light) • PA1: LM35 (Temp) • PA4: PIR (Motion) • PB4: Manual SW<br>
+          ⬇ (12-bit ADC1 & Digital GPIOs)<br>
+          <strong>[ STM32F446RE CONTROLLER (Cortex-M4 @ 180 MHz) ]</strong><br>
+          FSM Engine • 8x ADC Oversampling • TIM3 PWM Generator • Telemetry Streamer<br>
+          ⬇ (TIM3_CH1, I2C1, USART2, Relay GPIOs)<br>
+          [ ACTUATORS & DISPLAYS ]<br>
+          Dual-Zone Relays (PB0/PB1/PB2) • Fan (PB5) • SG90 Blinds (PA6) • Buzzer (PA7) • 16x2 LCD
+        </div>
+      </div>
+    </div>
+
+    <!-- 6. Hardware Design -->
+    <div class="card col-6">
+      <div class="card-header">
+        <div class="badge bg-teal">6</div>
+        <div class="card-title">Hardware Design & Pinout Map</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>PA0 (A0):</strong> LDR Light Sensor (ADC1_IN0, 12-bit analog input)</li>
+          <li><strong>PA1 (A1):</strong> LM35 Temperature Sensor (ADC1_IN1, 10 mV/°C linear analog)</li>
+          <li><strong>PA4 (A2):</strong> PIR Motion Sensor (Digital input, high on occupant presence)</li>
+          <li><strong>PB4 (D5):</strong> Manual Override Switch (Pull-up, force presentation mode)</li>
+          <li><strong>PA6 (D12):</strong> SG90 Servo Motor (TIM3_CH1 PWM, 50 Hz, 0° to 180° blinds)</li>
+          <li><strong>PA7 (D11):</strong> Piezo Buzzer (Pre-motion warning audio chime)</li>
+          <li><strong>PB0, PB1, PB2:</strong> Relays for Front Light (PB0), Mid Light (PB1), Back Light (PB2)</li>
+          <li><strong>PB5 (D4):</strong> Exhaust Fan Relay (Thermal closed-loop trigger @ >28°C)</li>
+          <li><strong>PB8, PB9 (D15, D14):</strong> I2C1 SCL/SDA for 16x2 HD44780 LCD Display (0x27)</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 7. Software Design -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-red">7</div>
+        <div class="card-title">Software Design (FSM)</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>STATE_DAYLIGHT:</strong> LDR > Threshold -> Lights OFF, Blinds 0° OPEN.</li>
+          <li><strong>STATE_DARK:</strong> LDR < Threshold -> All 3 Lighting Zones 100% ON.</li>
+          <li><strong>STATE_PRESENTATION:</strong> Front Light 0% OFF, Back Lights 20% Dimmed, Blinds 180° CLOSED with warning chime.</li>
+          <li><strong>STATE_ECO_SLEEP:</strong> No PIR motion for 30s -> All loads disconnected (<2W).</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 8. Implementation -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-blue">8</div>
+        <div class="card-title">Implementation Workflow</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>1.</strong> Initialize Nucleo-F446RE project in STM32CubeIDE.</li>
+          <li><strong>2.</strong> Configure GPIOs, ADC1 (Ch 0, 1), TIM3 PWM, I2C1, USART2.</li>
+          <li><strong>3.</strong> Generate HAL initialization drivers & link math lib.</li>
+          <li><strong>4.</strong> Implement FSM control loop & 8-point oversampling.</li>
+          <li><strong>5.</strong> Build binary with arm-none-eabi-gcc toolchain.</li>
+          <li><strong>6.</strong> Flash binary via ST-LINK V2 debugger.</li>
+          <li><strong>7.</strong> Validate dual-zone dimming & live CSV telemetry.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 9. Experimental Setup -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-green">9</div>
+        <div class="card-title">Experimental Setup</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>Breadboard Prototype:</strong> Nucleo-F446RE interfaced with LDR optical chamber, LM35 heat source, PIR motion sensor, SG90 servo blinds, and 4-channel relay module.</li>
+          <li><strong>Validation Procedures:</strong> Baseline lux calibration, manual override trigger testing, temperature ramp tests, and 30s vacancy timeout verification.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 10. Results and Execution Verification -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-orange">10</div>
+        <div class="card-title">Results & Execution</div>
+      </div>
+      <div class="card-content">
+        <ul>
+          <li><strong>Serial CSV Log (115200 Baud):</strong><br>
+          <code style="font-size:10px;">24500,PRESENT,1,850,26.4,0,20,0,180</code></li>
+          <li><strong>16x2 LCD Output:</strong><br>
+          <code>[PRESENT] LDR:650 | FRONT:OFF BK:DIM</code></li>
+          <li><strong>Efficiency:</strong> 48.6% power savings; 100% glare elimination.</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 11. Testing & Debugging Table -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-purple">11</div>
+        <div class="card-title">Testing & Debugging</div>
+      </div>
+      <div class="card-content">
+        <table class="test-table">
+          <tr><th>Test Case</th><th>Expected Result</th><th>Status</th></tr>
+          <tr><td>1. LDR Sampling</td><td>0-4095 raw lux reading</td><td><span class="status-pass">PASS</span></td></tr>
+          <tr><td>2. Dual-Zone Relays</td><td>Front 0%, Back 20%</td><td><span class="status-pass">PASS</span></td></tr>
+          <tr><td>3. SG90 Servo Blinds</td><td>0° to 180° rotation</td><td><span class="status-pass">PASS</span></td></tr>
+          <tr><td>4. Warning Buzzer</td><td>2x 60ms audio alert</td><td><span class="status-pass">PASS</span></td></tr>
+          <tr><td>5. LM35 Thermal Fan</td><td>Trigger at T > 28°C</td><td><span class="status-pass">PASS</span></td></tr>
+          <tr><td>6. PIR Eco-Sleep</td><td>Sleep after 30s vacancy</td><td><span class="status-pass">PASS</span></td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- 12, 13, 14. Conclusion, Future Scope, References -->
+    <div class="card col-4">
+      <div class="card-header">
+        <div class="badge bg-pink">12-14</div>
+        <div class="card-title">Conclusion & Future Scope</div>
+      </div>
+      <div class="card-content">
+        <p class="highlight-label">12. Conclusion:</p>
+        <p>Successfully engineered an edge-computed smart classroom controller that resolves presentation screen glare, preserves note-taking, and reduces institutional energy waste.</p>
+        <p class="highlight-label" style="margin-top:6px;">13. Future Scope:</p>
+        <p>Multi-room CAN bus campus mesh, ESP32 IoT cloud dashboard, and TinyML camera-based occupant headcount.</p>
+        <p class="highlight-label" style="margin-top:6px;">14. References:</p>
+        <p>STM32F446RE Reference Manual (RM0390) • TI LM35 Datasheet • IESNA Lighting Handbook.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer -->
+  <div class="footer-banner">
+    Dr. Munish Kumar Format • Smart Classroom & Reflection-Free Presentation Controller Project Report
+  </div>
+</div>
+
+</body>
+</html>
